@@ -21,8 +21,8 @@ const Form = () => {
 
 
 
-    const handleInput = () => {
-
+    const handleInput = (e) => {
+        setPostData({ ...postData, creator: e.target.value })
     }
 
 
@@ -34,6 +34,9 @@ const Form = () => {
                     Creating a Memory
                 </Typography>
                 <TextField name="creator" variant='outlined' label='Creator' fullWidth value={postData.creator} onChange={handleInput} />
+                <TextField name="title" variant='outlined' label='Title' fullWidth value={postData.title} onChange={handleInput} />
+                <TextField name="message" variant='outlined' label='Message' fullWidth value={postData.message} onChange={handleInput} />
+                <TextField name="tags" variant='outlined' label='Tags' fullWidth value={postData.tags} onChange={handleInput} />
             </form>
         </Paper>
     )
