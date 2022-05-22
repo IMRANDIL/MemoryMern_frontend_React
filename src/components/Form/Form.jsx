@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import useStyles from './styles';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createPosts, updatePost } from '../../actions/posts';
 
 
@@ -25,7 +25,21 @@ const Form = ({ currentId, setCurrentId }) => {
         selectedFile: ''
     });
 
+    const post = useSelector((state) => currentId ? state.posts.find((post) => post._id === currentId) : null);
+
     const dispatch = useDispatch();
+
+
+
+    useEffect(() => {
+
+        if (post) setPostData(post);
+
+
+
+    }, [post])
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,16 +47,19 @@ const Form = ({ currentId, setCurrentId }) => {
 
         if (currentId) {
             dispatch(updatePost(currentId, postData));
+
         } else {
             dispatch(createPosts(postData));
+
         }
 
-
+        clearInput();
 
     }
 
 
     const clearInput = () => {
+        setCurrentId(null);
         setPostData({
             creator: '',
             title: '',
@@ -57,7 +74,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <Paper className={classes.paper}>
             <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant='h6'>
-                    Creating a Memory
+                    {currentId ? 'Editing a Memory' : 'Creating a Memory'}
                 </Typography>
                 <TextField name="creator" variant='outlined' label='Creator' fullWidth value={postData.creator} onChange={(e) => setPostData({ ...postData, creator: e.target.value })} />
                 <TextField name="title" variant='outlined' label='Title' fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />

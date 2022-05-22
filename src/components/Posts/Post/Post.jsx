@@ -7,7 +7,7 @@ import MoreHorizIcon from '@material-ui/icons//MoreHoriz';
 import moment from 'moment'
 
 
-const Post = ({ post: { title, selectedFile, creator, createdAt, tags, message, likeCount, _id }, setCurrentId }) => {
+const Post = ({ post: { title, selectedFile, creator, createdAt, tags, message, likedCount, _id }, setCurrentId }) => {
 
 
     const classes = useStyles();
@@ -33,14 +33,15 @@ const Post = ({ post: { title, selectedFile, creator, createdAt, tags, message, 
                     ))
                 }</Typography>
             </div>
+            <Typography className={classes.title} variant='h5' gutterBottom>{title}</Typography>
             <CardContent>
-                <Typography className={classes.title} variant='h5' gutterBottom>{message}</Typography>
+                <Typography variant='h5' gutterBottom>{message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <Button size='small' color='primary' onClick={() => { }}>
                     <ThumbUpAltIcon fontSize='small' />
                     Like
-                    {likeCount}
+                    {likedCount}
                 </Button>
                 <Button size='small' color='primary' onClick={() => { }}>
                     <DeleteIcon fontSize='small' />
