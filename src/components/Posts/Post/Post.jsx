@@ -7,7 +7,7 @@ import MoreHorizIcon from '@material-ui/icons//MoreHoriz';
 import moment from 'moment'
 
 
-const Post = ({ post: { title, selectedFile, creator, createdAt, tags, message, likeCount } }) => {
+const Post = ({ post: { title, selectedFile, creator, createdAt, tags, message, likeCount, _id }, setCurrentId }) => {
 
 
     const classes = useStyles();
@@ -22,7 +22,7 @@ const Post = ({ post: { title, selectedFile, creator, createdAt, tags, message, 
                 <Typography variant='body2'>{moment(createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
-                <Button style={{ color: 'whitesmoke' }} size='small' onClick={() => { }}>
+                <Button style={{ color: 'whitesmoke' }} size='small' onClick={() => { setCurrentId(_id) }}>
                     <MoreHorizIcon fontSize='medium' />
                 </Button>
             </div>
