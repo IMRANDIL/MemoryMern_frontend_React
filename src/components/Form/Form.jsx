@@ -21,11 +21,24 @@ const Form = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(createPosts(postData));
+        setPostData({
+            creator: '',
+            title: '',
+            message: '',
+            tags: '',
+            selectedFile: ''
+        })
     }
 
 
     const clearInput = () => {
-
+        setPostData({
+            creator: '',
+            title: '',
+            message: '',
+            tags: '',
+            selectedFile: ''
+        })
     }
 
 
