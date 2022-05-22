@@ -4,7 +4,7 @@ import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux'
 import { createPosts, updatePost } from '../../actions/posts';
-
+import { toast } from 'react-toastify';
 
 
 
@@ -43,6 +43,9 @@ const Form = ({ currentId, setCurrentId }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+
+        if (!postData.creator || !postData.message || !postData.title || !postData.selectedFile || !postData.tags) return toast.error('All fields required!')
 
 
         if (currentId) {
